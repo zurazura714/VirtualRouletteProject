@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32106.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtualRoulette.Web", "VirtualRoulette.Web\VirtualRoulette.Web.csproj", "{1E8CAEDA-38A4-450B-9488-3BC24144AFBD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{DAE80BC5-78F2-46B4-B2B4-9F751E592576}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{0935C274-C881-442E-AACC-1E7A6CF00F1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualRoulette.Data.Users", "VirtualRoulette.Data.Users\VirtualRoulette.Data.Users.csproj", "{8FDDEC1C-B908-44F7-A323-DDF9E3E2388D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualRoulette.Data.Models", "VirtualRoulette.Data.Models\VirtualRoulette.Data.Models.csproj", "{45FBBD5A-6033-46BA-919F-7BD6059BE776}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualRoulette.Common.Abstractions", "VirtualRoulette.Common.Abstractions\VirtualRoulette.Common.Abstractions.csproj", "{EBA1A6F3-604B-4D29-8E2E-A0D9AC1D538A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{37A48245-2D84-43DF-9468-B2FE5949FA73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualRoulette.Identity", "VirtualRoulette.Identity\VirtualRoulette.Identity.csproj", "{5B78E022-5B19-4786-80A7-CB2829A41EE7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1E8CAEDA-38A4-450B-9488-3BC24144AFBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E8CAEDA-38A4-450B-9488-3BC24144AFBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E8CAEDA-38A4-450B-9488-3BC24144AFBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E8CAEDA-38A4-450B-9488-3BC24144AFBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FDDEC1C-B908-44F7-A323-DDF9E3E2388D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FDDEC1C-B908-44F7-A323-DDF9E3E2388D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FDDEC1C-B908-44F7-A323-DDF9E3E2388D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FDDEC1C-B908-44F7-A323-DDF9E3E2388D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45FBBD5A-6033-46BA-919F-7BD6059BE776}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45FBBD5A-6033-46BA-919F-7BD6059BE776}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45FBBD5A-6033-46BA-919F-7BD6059BE776}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45FBBD5A-6033-46BA-919F-7BD6059BE776}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBA1A6F3-604B-4D29-8E2E-A0D9AC1D538A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBA1A6F3-604B-4D29-8E2E-A0D9AC1D538A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBA1A6F3-604B-4D29-8E2E-A0D9AC1D538A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBA1A6F3-604B-4D29-8E2E-A0D9AC1D538A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B78E022-5B19-4786-80A7-CB2829A41EE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B78E022-5B19-4786-80A7-CB2829A41EE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B78E022-5B19-4786-80A7-CB2829A41EE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B78E022-5B19-4786-80A7-CB2829A41EE7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8FDDEC1C-B908-44F7-A323-DDF9E3E2388D} = {DAE80BC5-78F2-46B4-B2B4-9F751E592576}
+		{45FBBD5A-6033-46BA-919F-7BD6059BE776} = {DAE80BC5-78F2-46B4-B2B4-9F751E592576}
+		{EBA1A6F3-604B-4D29-8E2E-A0D9AC1D538A} = {0935C274-C881-442E-AACC-1E7A6CF00F1A}
+		{5B78E022-5B19-4786-80A7-CB2829A41EE7} = {37A48245-2D84-43DF-9468-B2FE5949FA73}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4F776E6E-B779-4D97-A105-DC64B23FCBF8}
+	EndGlobalSection
+EndGlobal
