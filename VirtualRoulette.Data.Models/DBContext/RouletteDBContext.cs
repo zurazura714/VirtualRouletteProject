@@ -21,6 +21,7 @@ namespace VirtualRoulette.Data.Models.DBContext
             //SqlConnection sq = null;
             //optionsBuilder.UseSqlServer(sq);
 
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
