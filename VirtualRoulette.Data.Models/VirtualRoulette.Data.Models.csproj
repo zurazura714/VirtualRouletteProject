@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\VirtualRoulette.Common.Abstractions\VirtualRoulette.Common.Abstractions.csproj" />
+    <ProjectReference Include="..\VirtualRoulette.Domain\VirtualRoulette.Domain.csproj" />
   </ItemGroup>
 
 </Project>

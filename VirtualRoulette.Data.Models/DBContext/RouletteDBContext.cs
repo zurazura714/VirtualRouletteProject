@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using VirtualRoulette.Data.Models.Models;
 using System.Configuration;
 using Microsoft.Data.SqlClient;
+using VirtualRoulette.Domain.Domains;
 
 namespace VirtualRoulette.Data.Models.DBContext
 {

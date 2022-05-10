@@ -7,12 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using VirtualRoulette.Common.Abstractions.Entity;
 
-namespace VirtualRoulette.Data.Models.Models
+namespace VirtualRoulette.Domain.Domains
 {
     [Table("Users")]
     public class User : IHasCreationTime
     {
-
         public int ID { get; set; }
         [Required]
         [Range(1, long.MaxValue)]
