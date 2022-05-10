@@ -13,6 +13,7 @@ using VirtualRoulette.Data.Models.DBContext;
 using VirtualRoulette.Data.Users;
 using VirtualRoulette.Data.Users.Entities;
 using System.Configuration;
+using VirtualRoulette.Commons.Constant_Strings;
 
 namespace VirtualRoulette.Identity
 {
@@ -37,23 +38,7 @@ namespace VirtualRoulette.Identity
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "VirtualRoulette.Identity", Version = "v1" });
             });
 
-
-            services.AddMvc(
-                options =>
-                {
-                    options.FormatterMappings.SetMediaTypeMappingForFormat
-                            ("xml", MediaTypeHeaderValue.Parse("Cofiguration/xml"));
-                });
-
-            var connectionString = ConfigurationManager.ConnectionStrings["UsersConnection"].ConnectionString;
-            services.AddDbContext<UsersDbContext>(options =>
-               options.UseSqlServer(connectionString));
-
-            //var a = Configuration.GetConnectionString("UsersConnection");
-            //var connectionString = ConfigurationManager.ConnectionStrings["UsersConnection"].ToString();
-
-            services.AddDbContext<RouletteDBContext>(options => 
-                options.UseSqlServer(connectionString));
+            ExecuteMySQLConnectionstrings(services);
 
             services.AddMemoryCache();
             services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
@@ -96,6 +81,19 @@ namespace VirtualRoulette.Identity
             });
         }
 
+        private static void ExecuteMySQLConnectionstrings(IServiceCollection services)
+        {
+            string mySqlConnectionStr =
+                        ConfigurationManager.ConnectionStrings[ConstantStrings.UsersConnection].ConnectionString;
+            //Configuration.GetConnectionString(ConstantStrings.UsersConnection);
+            services.AddDbContextPool<UsersDbContext>
+                (options => options.UseMySql(mySqlConnectionStr,
+                ServerVersion.AutoDetect(mySqlConnectionStr)));
+
+            services.AddDbContextPool<RouletteDBContext>
+                (options => options.UseMySql(mySqlConnectionStr,
+                ServerVersion.AutoDetect(mySqlConnectionStr)));
+        }
         private static void UpdateDatabase(IApplicationBuilder app)
         {
             using (var serviceScope = app.ApplicationServices

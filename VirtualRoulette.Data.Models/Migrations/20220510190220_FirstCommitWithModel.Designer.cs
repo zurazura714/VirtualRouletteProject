@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VirtualRoulette.Data.Models.DBContext;
@@ -10,29 +9,27 @@ using VirtualRoulette.Data.Models.DBContext;
 namespace VirtualRoulette.Data.Models.Migrations
 {
     [DbContext(typeof(RouletteDBContext))]
-    [Migration("20220508232220_FirstCommitModels")]
-    partial class FirstCommitModels
+    [Migration("20220510190220_FirstCommitWithModel")]
+    partial class FirstCommitWithModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.16")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("Relational:MaxIdentifierLength", 64)
+                .HasAnnotation("ProductVersion", "5.0.16");
 
             modelBuilder.Entity("VirtualRoulette.Data.Models.Models.User", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<long>("ApplicationUserId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset>("CreationTime")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("ID");
 

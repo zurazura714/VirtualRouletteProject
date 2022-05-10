@@ -2,9 +2,13 @@
 using VirtualRoulette.Data.Users.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace VirtualRoulette.Data.Users
 {
+    /// <summary>
+    /// Creating IdentityDBContext.
+    /// </summary>
     public class UsersDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, long, ApplicationUserClaim, ApplicationUserRole, ApplicationUserLogin, ApplicationRoleClaim, ApplicationUserToken>
     {
         public UsersDbContext(DbContextOptions<UsersDbContext> options) : base(options)

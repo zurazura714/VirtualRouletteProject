@@ -5,6 +5,9 @@ using Microsoft.Data.SqlClient;
 
 namespace VirtualRoulette.Data.Models.DBContext
 {
+    /// <summary>
+    /// Creating Model DBContext.
+    /// </summary>
     public class RouletteDBContext : DbContext
     {
         public virtual DbSet<User> Users { get; set; }

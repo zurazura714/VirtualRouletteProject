@@ -9,7 +9,7 @@ using Microsoft.Identity.Web;
 using Microsoft.OpenApi.Models;
 using VirtualRoulette.Data.Models.DBContext;
 using System.Configuration;
-
+using VirtualRoulette.Commons.Constant_Strings;
 
 namespace VirtualRoulette.Web
 {
@@ -34,19 +34,7 @@ namespace VirtualRoulette.Web
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "VirtualRoulette.Web", Version = "v1" });
             });
 
-
-            //var a = Configuration.GetConnectionString("UsersConnection");
-            var b = ConfigurationManager.ConnectionStrings["UsersConnection"].ConnectionString;
-            //var text = @"data source=(localdb)mssqllocaldb;initial catalog=usTest;integrated security=True;MultipleActiveResultSets=True";
-            //if (b == text)
-            //{
-
-            //}
-            services.AddDbContext<RouletteDBContext>(options =>
-                options.UseSqlServer(b));
-            //services.AddDbContext<RouletteDBContext>(options =>
-            //   options.UseSqlServer(ConfigurationManager.ConnectionStrings["UsersConnection"].ConnectionString.ToString()));
-
+            ExecuteMySQLConnectionstrings(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,15 +47,7 @@ namespace VirtualRoulette.Web
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "VirtualRoulette.Web v1"));
             }
 
-            using (var serviceScope = app.ApplicationServices
-             .GetRequiredService<IServiceScopeFactory>()
-             .CreateScope())
-            {
-                using (var context = serviceScope.ServiceProvider.GetService<RouletteDBContext>())
-                {
-                    context.Database.Migrate();
-                }
-            }
+            UpdateDatabase(app);
 
             app.UseHttpsRedirection();
 
@@ -80,6 +60,27 @@ namespace VirtualRoulette.Web
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private static void ExecuteMySQLConnectionstrings(IServiceCollection services)
+        {
+            string mySqlConnectionStr =
+                        ConfigurationManager.ConnectionStrings[ConstantStrings.UsersConnection].ConnectionString;
+
+            services.AddDbContextPool<RouletteDBContext>
+                (options => options.UseMySql(mySqlConnectionStr,
+                ServerVersion.AutoDetect(mySqlConnectionStr)));
+        }
+        private static void UpdateDatabase(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices
+                .GetRequiredService<IServiceScopeFactory>()
+                .CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetService<RouletteDBContext>();
+                context.Database.Migrate();
+
+            }
         }
     }
 }
