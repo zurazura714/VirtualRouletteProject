@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\" />
+    <ProjectReference Include="..\VirtualRoulette.Common.Abstractions\VirtualRoulette.Common.Abstractions.csproj" />
+    <ProjectReference Include="..\VirtualRoulette.Data.Models\VirtualRoulette.Data.Models.csproj" />
   </ItemGroup>
 
 </Project>

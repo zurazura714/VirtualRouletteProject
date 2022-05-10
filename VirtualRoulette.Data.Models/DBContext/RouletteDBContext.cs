@@ -2,13 +2,14 @@
 using System.Configuration;
 using Microsoft.Data.SqlClient;
 using VirtualRoulette.Domain.Domains;
+using VirtualRoulette.Common.Abstractions.Repositories;
 
 namespace VirtualRoulette.Data.Models.DBContext
 {
     /// <summary>
     /// Creating Model DBContext.
     /// </summary>
-    public class RouletteDBContext : DbContext
+    public class RouletteDBContext : DbContext, IUnitOfWork
     {
         public virtual DbSet<User> Users { get; set; }
 
@@ -30,6 +31,16 @@ namespace VirtualRoulette.Data.Models.DBContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+        }
+
+        public void Commit()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Rollback()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
