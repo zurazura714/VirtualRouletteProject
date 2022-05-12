@@ -1,48 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using VirtualRoulette.Common.Abstractions.Services;
+using VirtualRoulette.Commons.POCO;
 using VirtualRoulette.Web.Filters;
 
 namespace VirtualRoulette.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[CustomAuthorize(sessionService:]
+    [CustomAuthorize]
     public class UserController : Controller
     {
         private readonly IUserService _userService;
         private readonly ISessionService _sessionService;
-        public UserController(IUserService userService, ISessionService sessionService)
+        private readonly IMapper _mapper;
+        public UserController(IUserService userService, ISessionService sessionService, IMapper mapper)
         {
             _userService = userService;
             _sessionService = sessionService;
+            _mapper = mapper;
         }
 
-        [HttpPost]
-        [Route("getinfo")]
-        public IActionResult GetInfo()
+        [HttpGet]
+        [Route("GetUserNameAndBalance")]
+        public IActionResult GetUserNameAndBalance()
         {
+            var token = TokenReciever.TokenReciever.Token;
             //Get username and balance from database
-            var token = getToken();
-            var user = _sessionService.ReturnUserAndBalance(token);
-            //if user object is null then return http status code 500 (internal server error)
-            if (user == null)
-            {
-                return Unauthorized();
-            }
-            return Ok(new { username = user.UserName, balance = user.Balance });
-        }
+            var currentSession = _mapper.Map<SessionTokenModel>(_sessionService.ReturnCurrentSession(token));
 
-        protected string getToken()
-        {
-            if (Request.Query.ContainsKey("token"))
+            if (currentSession != null)
             {
-                return Request.Query.Where(x => x.Key == "token").FirstOrDefault().Value;
+                var user = _mapper.Map<UserNameAndBalanceModel>(_userService.Fetch(currentSession.AppUserID));
+                if (user != null)
+                    return Ok(user);
             }
-            return "";
+            return Unauthorized();
         }
-
     }
 }

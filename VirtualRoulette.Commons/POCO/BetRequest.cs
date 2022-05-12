@@ -1,11 +1,14 @@
-﻿namespace VirtualRoulette.Web.Models
+﻿namespace VirtualRoulette.Commons.POCO
 {
     public class BetRequest
     {
         public string T { get; set; }
+
         public int I { get; set; }
+
         public int C { get; set; }
+
         public int K { get; set; }
+
     }
 }
-

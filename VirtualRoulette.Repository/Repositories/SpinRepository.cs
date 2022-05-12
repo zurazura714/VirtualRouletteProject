@@ -3,11 +3,10 @@ using VirtualRoulette.Domain.Domains;
 
 namespace VirtualRoulette.Repository.Repositories
 {
-    public class UserRepository : RepositoryBase<AppUser>, IUserRepository
+    public class SpinRepository : RepositoryBase<Spin>, ISpinRepository
     {
-        public UserRepository(IUnitOfWork context) : base(context)
+        public SpinRepository(IUnitOfWork context) : base(context)
         {
-
         }
     }
 }

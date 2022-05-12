@@ -12,6 +12,9 @@ using System.Configuration;
 using VirtualRoulette.Commons.Constant_Strings;
 using VirtualRoulette.Common.Abstractions.Repositories;
 using VirtualRoulette.Repository.Repositories;
+using VirtualRoulette.Common.Abstractions.Services;
+using VirtualRoulette.Service.Services;
+using System;
 
 namespace VirtualRoulette.Web
 {
@@ -30,7 +33,9 @@ namespace VirtualRoulette.Web
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"));
 
-            services.AddControllers();
+
+            services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "VirtualRoulette.Web", Version = "v1" });
@@ -38,12 +43,11 @@ namespace VirtualRoulette.Web
 
 
             string mySqlConnectionStr =
-                        //ConfigurationManager.ConnectionStrings[ConstantStrings.UsersConnection].ConnectionString;
-                        Configuration.GetConnectionString(ConstantStrings.UsersConnection);
+                        ConfigurationManager.ConnectionStrings[ConstantStrings.UsersConnection].ConnectionString;
+            //Configuration.GetConnectionString(ConstantStrings.UsersConnection);
             ExecuteMySQLConnectionstrings(services, mySqlConnectionStr);
 
-            //services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
+            services.AddSingleton<TokenReciever.TokenReciever>();
             AddRepositoriesAndServices(services);
         }
 
@@ -87,21 +91,24 @@ namespace VirtualRoulette.Web
             {
                 var context = serviceScope.ServiceProvider.GetService<RouletteDBContext>();
                 context.Database.Migrate();
-
             }
+            VirtualRoulette.Web.DataInit.DataInit.AddData(app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope().ServiceProvider);
         }
         private static void AddRepositoriesAndServices(IServiceCollection services)
         {
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<IUnitOfWork, RouletteDBContext>();
 
             services.AddScoped<IUserRepository, UserRepository>();
-            //services.AddScoped<IPersonService, PersonService>();
+            services.AddScoped<IJackPotRepository, JackPotRepository>();
+            services.AddScoped<ISessionRepository, SessionRepository>();
+            services.AddScoped<ISpinRepository, SpinRepository>();
 
-            //services.AddScoped<IPhoneRepository, PhoneRepository>();
-            //services.AddScoped<IPhoneService, PhoneService>();
 
-            //services.AddScoped<IRelationRepository, RelationRepository>();
-            //services.AddScoped<IRelationService, RelationService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IJackPotService, JackPotService>();
+            services.AddScoped<ISessionService, SessionService>();
+            services.AddScoped<ISpinService, SpinService>();
         }
     }
 }

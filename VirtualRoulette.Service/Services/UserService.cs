@@ -9,7 +9,7 @@ using VirtualRoulette.Service.Services;
 
 namespace VirtualRoulette.Service.Services
 {
-    public partial class UserService : ServiceBase<AppUser, IUserRepository>, IUserService
+    public class UserService : ServiceBase<AppUser, IUserRepository>, IUserService
     {
         public UserService(IUnitOfWork context, IUserRepository userRepository) : base(context, userRepository)
         {
@@ -22,9 +22,8 @@ namespace VirtualRoulette.Service.Services
 
             if (user != null)
             {
-                //Get sign key from appsettings.json
-                string key = "SingularKey123123"; /*configuration.GetSection("SignKey").Value;*/
-                //concat sign string Username:Password:Time, time because every token will be unic
+                string key = "Signkey";
+                //concat sign string Username:Password:Time, time because every token will be unique
                 string data = String.Format("{0}:{1}:{2}", user.UserName, user.Password, DateTime.Now.ToLongTimeString());
                 //Generate token
                 string tokenValue = Cryptography.HmacSHA256(key, data);
@@ -32,6 +31,12 @@ namespace VirtualRoulette.Service.Services
                 return new UserModel { Token = tokenValue, User = user };
             }
             return null;
+        }
+        public UserNameAndBalanceModel GetUserNameAndBalance(string userName)
+        {
+            return Set().Where(x => x.UserName == userName)
+                        .Select(a => new UserNameAndBalanceModel
+                        { Balance = a.Balance, UserName = a.UserName }).SingleOrDefault();
         }
     }
 }

@@ -11,5 +11,6 @@ namespace VirtualRoulette.Common.Abstractions.Services
     public interface IUserService : IServiceBase<AppUser>
     {
         UserModel GetUser(Login login);
+        UserNameAndBalanceModel GetUserNameAndBalance(string userName);
     }
 }

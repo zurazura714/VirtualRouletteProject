@@ -3,11 +3,10 @@ using VirtualRoulette.Domain.Domains;
 
 namespace VirtualRoulette.Repository.Repositories
 {
-    public class UserRepository : RepositoryBase<AppUser>, IUserRepository
+    public class JackPotRepository : RepositoryBase<JackPot>, IJackPotRepository
     {
-        public UserRepository(IUnitOfWork context) : base(context)
+        public JackPotRepository(IUnitOfWork context) : base(context)
         {
-
         }
     }
 }

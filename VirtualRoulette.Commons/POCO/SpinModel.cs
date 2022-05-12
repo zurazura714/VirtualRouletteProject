@@ -1,12 +1,10 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using VirtualRoulette.Domain.Domains.Enums;
 
-namespace VirtualRoulette.Domain.Domains
+namespace VirtualRoulette.Commons.POCO
 {
-    public class Spin
+    public class SpinModel
     {
-        [Key]
         public int ID { get; set; }
 
         public long BetAmount { get; set; }
@@ -19,10 +17,10 @@ namespace VirtualRoulette.Domain.Domains
 
         public string IpAddress { get; set; }
 
-        public AppUser AppUser { get; set; }
-        public int AppUserID { get; set; }
-        public SessionToken SessionToken { get; set; }
-        public int SessionTokenID { get; set; }
+        public AppUserModel AppUser { get; set; }
+
+        public SessionTokenModel SessionToken { get; set; }
+
         public long AmountForJackpot { get; set; }
         public WonOrLostStatus Status { get; set; }
     }

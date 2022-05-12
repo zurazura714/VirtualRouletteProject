@@ -1,4 +1,5 @@
-﻿using VirtualRoulette.Common.Abstractions.Repositories;
+﻿using System.Linq;
+using VirtualRoulette.Common.Abstractions.Repositories;
 using VirtualRoulette.Domain.Domains;
 
 namespace VirtualRoulette.Repository.Repositories
@@ -9,5 +10,9 @@ namespace VirtualRoulette.Repository.Repositories
         {
 
         }
+        //public SessionToken GetSessionTokenIncludedAppUser(string token)
+        //{
+        //    //var a = Context.
+        //}
     }
 }

@@ -1,45 +1,35 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using VirtualRoulette.Common.Abstractions.Services;
+using VirtualRoulette.Domain.Domains.Enums;
+using VirtualRoulette.Web.Filters;
 
 namespace VirtualRoulette.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Auth]
+    //[CustomAuthorize]
     public class JackPotController : Controller
     {
-        private ApplicationDbContext context;
+        private readonly IJackPotService _jackPotService;
 
-        public JackPotController(ApplicationDbContext context)
+        public JackPotController(IJackPotService jackPotService)
         {
-            this.context = context;
+            _jackPotService = jackPotService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        [Route("GetJackPot")]
+        public IActionResult GetJackPot()
         {
-            try
-            {
-                JackInPot jackInPot = (from t in context.JackinPots
-                                       where t.Status == 1
-                                       select new JackInPot
-                                       {
-                                           ID = t.ID,
-                                           JackPotAmount = t.JackPotAmount,
-                                           Status = t.Status
-                                       }).ToList().FirstOrDefault();
-
-                return Ok(new { jackpotAmount = (jackInPot == null) ? 0 : jackInPot.JackPotAmount });
-            }
-            catch (Exception ex)
-            {
-                Log.Logger("JackPot Index:" + ex.Message);
-                return StatusCode(500);
-            }
-
-
+            var jackPot = _jackPotService.Set().Where(a => a.Status == JackpotStatus.Active).FirstOrDefault();
+            if (jackPot != null)
+                return Ok(new { JackPotAmount = jackPot.JackPotAmount });
+            else
+                return NotFound();
         }
     }
 }

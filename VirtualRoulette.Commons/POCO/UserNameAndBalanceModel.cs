@@ -3,6 +3,6 @@
     public class UserNameAndBalanceModel
     {
         public string UserName { get; set; }
-        public int Balance { get; set; }
+        public long Balance { get; set; }
     }
 }

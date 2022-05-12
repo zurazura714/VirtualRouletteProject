@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VirtualRoulette.Data.Models.DBContext;
 
 namespace VirtualRoulette.Data.Models.Migrations
 {
     [DbContext(typeof(RouletteDBContext))]
-    partial class RouletteDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220512144434_AddAppUserID")]
+    partial class AddAppUserID
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,8 +48,8 @@ namespace VirtualRoulette.Data.Models.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<decimal>("JackPotAmount")
-                        .HasColumnType("decimal(65,30)");
+                    b.Property<long>("JackPotAmount")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -91,7 +93,7 @@ namespace VirtualRoulette.Data.Models.Migrations
                     b.Property<long>("AmountForJackpot")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("AppUserID")
+                    b.Property<int?>("AppUserID")
                         .HasColumnType("int");
 
                     b.Property<long>("BetAmount")
@@ -100,14 +102,11 @@ namespace VirtualRoulette.Data.Models.Migrations
                     b.Property<string>("IpAddress")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("SessionTokenID")
+                    b.Property<int?>("SessionTokenID")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("SpinDate")
                         .HasColumnType("datetime(6)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
 
                     b.Property<int>("WinningNumber")
                         .HasColumnType("int");
@@ -139,15 +138,11 @@ namespace VirtualRoulette.Data.Models.Migrations
                 {
                     b.HasOne("VirtualRoulette.Domain.Domains.AppUser", "AppUser")
                         .WithMany("spins")
-                        .HasForeignKey("AppUserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AppUserID");
 
                     b.HasOne("VirtualRoulette.Domain.Domains.SessionToken", "SessionToken")
                         .WithMany("Spins")
-                        .HasForeignKey("SessionTokenID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SessionTokenID");
 
                     b.Navigation("AppUser");
 

@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace VirtualRoulette.Domain.Domains
+namespace VirtualRoulette.Commons.POCO
 {
-    public class SessionToken
+    public class SessionTokenModel
     {
         public int ID { get; set; }
 
@@ -13,9 +16,9 @@ namespace VirtualRoulette.Domain.Domains
 
         public DateTime CreateDate { get; set; }
 
-        public AppUser AppUser { get; set; }
+        public AppUserModel AppUser { get; set; }
         public int AppUserID { get; set; }
 
-        public ICollection<Spin> Spins { get; set; }
+        public ICollection<SpinModel> Spins { get; set; }
     }
 }
