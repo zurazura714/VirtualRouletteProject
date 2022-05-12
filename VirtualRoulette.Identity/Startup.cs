@@ -55,6 +55,21 @@ namespace VirtualRoulette.Identity
             }).AddEntityFrameworkStores<UsersDbContext>()
             .AddDefaultTokenProviders();
 
+            // CONFIG EXAMPLE CONFIGURATION IN MEMMORY STORE INSTEAD DATABASE
+
+            //services.AddIdentityServer(options =>
+            //{
+            //    options.Events.RaiseErrorEvents = true;
+            //    options.Events.RaiseInformationEvents = true;
+            //    options.Events.RaiseFailureEvents = true;
+            //    options.Events.RaiseSuccessEvents = true;
+            //}).AddDeveloperSigningCredential()
+            //    .AddInMemoryPersistedGrants()
+            //    .AddInMemoryIdentityResources(Config.GetIdentityResources())
+            //    .AddInMemoryApiResources(Config.GetApiResources())
+            //    .AddInMemoryClients(Config.GetClients(Configuration))
+            //    .AddAspNetIdentity<ApplicationUser>()
+            //    .AddProfileService<ProfileService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

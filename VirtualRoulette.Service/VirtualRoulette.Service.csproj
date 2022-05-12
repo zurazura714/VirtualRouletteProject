@@ -5,7 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.17" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\VirtualRoulette.Common.Abstractions\VirtualRoulette.Common.Abstractions.csproj" />
+    <ProjectReference Include="..\VirtualRoulette.Commons\VirtualRoulette.Commons.csproj" />
   </ItemGroup>
 
 </Project>

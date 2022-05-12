@@ -23,6 +23,17 @@
   <ItemGroup>
     <ProjectReference Include="..\VirtualRoulette.Commons\VirtualRoulette.Commons.csproj" />
     <ProjectReference Include="..\VirtualRoulette.Data.Models\VirtualRoulette.Data.Models.csproj" />
+    <ProjectReference Include="..\VirtualRoulette.Repository\VirtualRoulette.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ge.singular.roulette">
+      <HintPath>..\..\..\..\..\Downloads\NET Task\ge.singular.roulette.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

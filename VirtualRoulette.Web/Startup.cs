@@ -10,6 +10,8 @@ using Microsoft.OpenApi.Models;
 using VirtualRoulette.Data.Models.DBContext;
 using System.Configuration;
 using VirtualRoulette.Commons.Constant_Strings;
+using VirtualRoulette.Common.Abstractions.Repositories;
+using VirtualRoulette.Repository.Repositories;
 
 namespace VirtualRoulette.Web
 {
@@ -34,8 +36,17 @@ namespace VirtualRoulette.Web
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "VirtualRoulette.Web", Version = "v1" });
             });
 
-            ExecuteMySQLConnectionstrings(services);
+
+            string mySqlConnectionStr =
+                        //ConfigurationManager.ConnectionStrings[ConstantStrings.UsersConnection].ConnectionString;
+                        Configuration.GetConnectionString(ConstantStrings.UsersConnection);
+            ExecuteMySQLConnectionstrings(services, mySqlConnectionStr);
+
+            //services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            AddRepositoriesAndServices(services);
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -62,11 +73,8 @@ namespace VirtualRoulette.Web
             });
         }
 
-        private static void ExecuteMySQLConnectionstrings(IServiceCollection services)
+        private static void ExecuteMySQLConnectionstrings(IServiceCollection services, string mySqlConnectionStr)
         {
-            string mySqlConnectionStr =
-                        ConfigurationManager.ConnectionStrings[ConstantStrings.UsersConnection].ConnectionString;
-
             services.AddDbContextPool<RouletteDBContext>
                 (options => options.UseMySql(mySqlConnectionStr,
                 ServerVersion.AutoDetect(mySqlConnectionStr)));
@@ -81,6 +89,19 @@ namespace VirtualRoulette.Web
                 context.Database.Migrate();
 
             }
+        }
+        private static void AddRepositoriesAndServices(IServiceCollection services)
+        {
+            services.AddScoped<IUnitOfWork, RouletteDBContext>();
+
+            services.AddScoped<IUserRepository, UserRepository>();
+            //services.AddScoped<IPersonService, PersonService>();
+
+            //services.AddScoped<IPhoneRepository, PhoneRepository>();
+            //services.AddScoped<IPhoneService, PhoneService>();
+
+            //services.AddScoped<IRelationRepository, RelationRepository>();
+            //services.AddScoped<IRelationService, RelationService>();
         }
     }
 }

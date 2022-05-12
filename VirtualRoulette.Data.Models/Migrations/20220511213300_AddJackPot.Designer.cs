@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VirtualRoulette.Data.Models.DBContext;
 
 namespace VirtualRoulette.Data.Models.Migrations
 {
     [DbContext(typeof(RouletteDBContext))]
-    partial class RouletteDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220511213300_AddJackPot")]
+    partial class AddJackPot
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VirtualRoulette.Common.Abstractions.Entity
+namespace VirtualRoulette.Domain
 {
     public interface IHasCreationTime
     {
