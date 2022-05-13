@@ -39,7 +39,7 @@ namespace VirtualRoulette.Web.Controllers
         ///Summary
         public IActionResult MakeBet(List<BetRequest> ticks)
         {
-            var ipAddress = Request.HttpContext.Connection.RemoteIpAddress.AddressFamily.ToString();
+            var ipAddress = Request.HttpContext.Connection.LocalIpAddress.ToString();
             string token = TokenReciever.TokenReciever.Token;
 
             //Get Current Session And User From DB

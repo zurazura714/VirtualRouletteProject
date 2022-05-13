@@ -15,6 +15,7 @@ using VirtualRoulette.Repository.Repositories;
 using VirtualRoulette.Common.Abstractions.Services;
 using VirtualRoulette.Service.Services;
 using System;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace VirtualRoulette.Web
 {
@@ -61,7 +62,11 @@ namespace VirtualRoulette.Web
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "VirtualRoulette.Web v1"));
             }
-
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor |
+                    ForwardedHeaders.XForwardedProto
+            });
             UpdateDatabase(app);
 
             app.UseHttpsRedirection();
