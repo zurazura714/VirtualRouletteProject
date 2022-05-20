@@ -30,10 +30,4 @@
     <ProjectReference Include="..\VirtualRoulette.Service\VirtualRoulette.Service.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="ge.singular.roulette">
-      <HintPath>..\..\..\..\..\Downloads\NET Task\ge.singular.roulette.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>
